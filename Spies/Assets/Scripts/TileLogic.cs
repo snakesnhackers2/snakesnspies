@@ -9,6 +9,9 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     // Start is called before the first frame update
     Image hover;
     public GameObject trapCard;
+    public int damage;
+    public int defense;
+    public int hpBoost;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -35,7 +38,6 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
         Transform tile = this.transform;
         Instantiate(trapCard, tile);
-        //trapCard.transform.parent = tile;
     }
 
     void Start()
