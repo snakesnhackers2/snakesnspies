@@ -99,6 +99,11 @@ MonoBehaviour:
   cardName: ShieldCard
   posInHand: 0
   inBigCardPos: 0
+  type: Defense
+  damage: 0
+  defense: 0.6
+  hpBoost: 0
+  rounds: 0
 --- !u!61 &-3553503413185874219
 BoxCollider2D:
   m_ObjectHideFlags: 0

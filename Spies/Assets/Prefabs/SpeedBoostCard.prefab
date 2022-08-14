@@ -99,6 +99,11 @@ MonoBehaviour:
   cardName: SpeedBoostCard
   posInHand: 0
   inBigCardPos: 0
+  type: Boost
+  damage: 0
+  defense: 0
+  hpBoost: 0
+  rounds: 0
 --- !u!61 &6336831530684743475
 BoxCollider2D:
   m_ObjectHideFlags: 0

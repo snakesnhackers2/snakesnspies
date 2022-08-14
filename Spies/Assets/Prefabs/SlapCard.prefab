@@ -99,6 +99,11 @@ MonoBehaviour:
   cardName: SlapCard
   posInHand: 0
   inBigCardPos: 0
+  type: Combat
+  damage: 10
+  defense: 0
+  hpBoost: 0
+  rounds: 0
 --- !u!61 &6827113471487911046
 BoxCollider2D:
   m_ObjectHideFlags: 0

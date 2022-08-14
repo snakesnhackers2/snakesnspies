@@ -99,6 +99,11 @@ MonoBehaviour:
   cardName: ZapTrapCard
   posInHand: 0
   inBigCardPos: 0
+  type: Trap
+  damage: 20
+  defense: 0
+  hpBoost: 0
+  rounds: 0
 --- !u!61 &-6146015093964239730
 BoxCollider2D:
   m_ObjectHideFlags: 0
