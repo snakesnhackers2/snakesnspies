@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    ////// MAIN GAME HANDLING + GAMESTATE UPDATES
+
     public Card DrawCard()
     {
         Card randCard = deck[Random.Range(0, deck.Count)];
@@ -100,6 +102,8 @@ public class GameManager : MonoBehaviour
 
         //
     }
+
+    /////// COMBAT HANDLING
 
     // TODO
     public void EnterCombatSetup(int playernumleft, int playernumright)
@@ -169,6 +173,7 @@ public class GameManager : MonoBehaviour
     }
 
 
+    /////// CARD HANDLING
 
     // TODO
     public void CardSelection(Card cardSelected)
@@ -273,7 +278,6 @@ public class GameManager : MonoBehaviour
     }
 
     // TODO
-
     public void CardUsed(string cardName)
     {
         bool invalidCard = true;
