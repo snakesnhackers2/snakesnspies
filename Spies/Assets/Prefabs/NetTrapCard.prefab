@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: NetTrapCard
+  type: Trap
   damage: 10
   defense: 0
   hpBoost: 0

@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: AppleCard
+  type: Boost
   damage: 0
   defense: 0
   hpBoost: 10
+  rounds: 0

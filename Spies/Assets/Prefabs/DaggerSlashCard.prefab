@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: DaggerSlashCard
+  type: Combat
   damage: 45
   defense: 0
   hpBoost: 0
+  rounds: 0

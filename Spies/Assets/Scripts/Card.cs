@@ -5,6 +5,7 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     public string cardName;
+    public string type;
     public int damage;
     public float defense; //percentage
     public int hpBoost;

@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: HeartyCakeCard
+  type: Boost
   damage: 0
   defense: 0
   hpBoost: 50

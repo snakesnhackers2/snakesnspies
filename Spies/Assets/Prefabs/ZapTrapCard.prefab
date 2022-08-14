@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: ZapTrapCard
+  type: Trap
   damage: 20
   defense: 0
   hpBoost: 0
