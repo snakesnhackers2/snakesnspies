@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public bool hasTotem = false; 
+    public bool hasTotem = false;
     public int currentTile = 1;
     GameObject destination;
 
@@ -15,18 +15,19 @@ public class PlayerMove : MonoBehaviour
 
     public void Move(int steps)
     {
+        Transform player = this.transform;
         for (int i = 0; i < steps; i++)
         {
             currentTile++;
             if (currentTile > 100)
             {
                 currentTile = 100;
-                Transform player = this.transform;
                 destination = GameObject.Find($"Tower/100");
                 player.SetParent(destination.gameObject.transform);
 
                 TileLogic end = destination.GetComponent<TileLogic>();
-                if(end.hasTotem) {
+                if (end.hasTotem)
+                {
                     hasTotem = true; // set player as owner
                     end.hasTotem = false; // remove totem from tile
                     Destroy(GameObject.Find("Tower/100/TotemTile"));
@@ -39,7 +40,6 @@ public class PlayerMove : MonoBehaviour
         } */
             else
             {
-                Transform player = this.transform;
                 destination = GameObject.Find($"Tower/{currentTile}");
                 foreach (Transform transform in destination.transform)
                 {
@@ -64,8 +64,6 @@ public class PlayerMove : MonoBehaviour
                 player.SetParent(destination.gameObject.transform);
             }
 
-
-
             /*  waitTime = 2;
                         //Reset counter
                         float counter = 0f;
@@ -77,6 +75,16 @@ public class PlayerMove : MonoBehaviour
                             //Check if we want to quit this function
                             //Wait for a frame so that Unity doesn't freeze
                         } */
+        }
+
+        // if destination has a vent, take the route to the other end
+        Vent vent = destination.GetComponent<Vent>();
+        if (vent)
+        {
+            int otherEnd = vent.otherEnd;
+            currentTile = otherEnd;
+            GameObject opening = GameObject.Find($"Tower/{otherEnd}");
+            player.SetParent(opening.gameObject.transform);
         }
     }
 }
