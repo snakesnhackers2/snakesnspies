@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     private bool combatCardSelected = false;
     private bool endTurn = false;
 
-    private bool goodLuckActive = false;
+    private bool[] goodLuckActive = new bool[] { false, false };
 
 
     private void Start()
@@ -130,6 +130,14 @@ public class GameManager : MonoBehaviour
         speedBoostActive = false;
 
         // the health bar visibility toggle (KIV)
+
+        if (players[mainPlayerTurn - 1].turnsToSkip > 0)
+        {
+            players[mainPlayerTurn - 1].turnsToSkip--;
+            UpdateMainTurn();
+        }
+
+        // ANything else???
     }
 
     // TODO function for when a player passes a card station 
@@ -203,7 +211,6 @@ public class GameManager : MonoBehaviour
         playerTurnText.text = "Player " + playerOrder[0] + "'s Turn";
 
 
-        // TODO
         // Clear combat setup variables
         combatCardSelected = false;
         diceRolled = false;
@@ -211,7 +218,7 @@ public class GameManager : MonoBehaviour
 
         damageProtect = new float[] { 0f, 0f };
         damageDealt = new int[] { 0, 0 };
-        goodLuckActive = false;
+        goodLuckActive = new bool[] {false, false};
 
         combatPlayerTurn = 0;
 
@@ -219,18 +226,81 @@ public class GameManager : MonoBehaviour
         TotalDamageRight.text = "Total Attack:\n" + damageDealt[1].ToString();
     }
 
-    // TODO to update combat turn status and combat selection over etc
+    public void EndTurnButton()
+    {
+        endTurn = true;
+        CombatStatusUpdate();
+    }
+
     public void CombatStatusUpdate()
     {
         // check if the dice has been rolled
 
+        if (diceRolled)
+        {
+            if (endTurn || combatCardSelected)
+            {
+                combatPlayerTurn += 1;
 
+                combatCardSelected = false;
+                diceRolled = false;
+                endTurn = false;
+
+                if (combatPlayerTurn > 1)
+                {
+                    ProcessCombatResult();
+                } 
+            }
+        }
     }
 
-    // TODO
     public void ProcessCombatResult()
     {
         // check if anyone died, if totem is passed etc
+        int damageRecieved = 0;
+        int healthRemain = 0;
+
+        // calculate damate to playerOrder[0]
+        damageRecieved = (int)Mathf.Round(damageDealt[1] * (1 - damageProtect[0]));
+
+        if (goodLuckActive[0])
+        {
+            goodLuckActive[0] = false;
+            if (Random.Range(0,10) > 7)
+            {
+                damageRecieved = 0;
+            }
+        }
+
+        healthRemain = players[playerOrder[0]].health - damageRecieved;
+
+        if (healthRemain <= 0)
+        {
+            players[playerOrder[0]].turnsToSkip = 2;
+            healthRemain = 50;
+        }
+
+        // calculate damate to playerOrder[0]
+        damageRecieved = (int)Mathf.Round(damageDealt[0] * (1 - damageProtect[1]));
+
+        if (goodLuckActive[1])
+        {
+            goodLuckActive[1] = false;
+            if (Random.Range(0, 10) > 7)
+            {
+                damageRecieved = 0;
+            }
+        }
+
+        healthRemain = players[playerOrder[1]].health - damageRecieved;
+
+        if (healthRemain <= 0)
+        {
+            players[playerOrder[1]].turnsToSkip = 2;
+            healthRemain = 50;
+        }
+
+        ExitCombat();
 
     }
 
@@ -505,7 +575,7 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case "GoodLuckCard":
-                        goodLuckActive = true;
+                        goodLuckActive[combatPlayerTurn] = true;
                         combatCardSelected = true;
                         invalidCard = false;
                         break;
@@ -627,6 +697,7 @@ public class GameManager : MonoBehaviour
         
         
         diceRolled = true;
+        CombatStatusUpdate();
     }
 
 

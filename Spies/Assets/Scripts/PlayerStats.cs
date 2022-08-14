@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-
+    public int turnsToSkip = 0;
     public int health = 100;
     public StatusBarScript playerhealth;
     public bool[] availableCardSlots = new bool[] { true, true, true, true, true };
