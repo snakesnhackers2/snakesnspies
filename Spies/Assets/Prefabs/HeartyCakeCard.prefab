@@ -99,6 +99,11 @@ MonoBehaviour:
   cardName: HeartyCakeCard
   posInHand: 0
   inBigCardPos: 0
+  type: Boost
+  damage: 0
+  defense: 0
+  hpBoost: 50
+  rounds: 0
 --- !u!61 &-7642019678913991880
 BoxCollider2D:
   m_ObjectHideFlags: 0

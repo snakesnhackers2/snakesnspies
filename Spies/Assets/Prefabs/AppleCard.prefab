@@ -99,6 +99,11 @@ MonoBehaviour:
   cardName: AppleCard
   posInHand: 0
   inBigCardPos: 0
+  type: Boost
+  damage: 0
+  defense: 0
+  hpBoost: 10
+  rounds: 0
 --- !u!61 &-3901952331031703119
 BoxCollider2D:
   m_ObjectHideFlags: 0
