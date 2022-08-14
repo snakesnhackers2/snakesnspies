@@ -12,10 +12,12 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     public int damage;
     public int defense;
     public int hpBoost;
+    int numOfPlayers = 0;
+    public bool hasTotem = false;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("mouse enter" + gameObject.name);
+        //Debug.Log("mouse enter" + gameObject.name);
         var tempColor = hover.color;
         tempColor.a = 1f;
         hover.color = tempColor;
@@ -24,7 +26,7 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("mouse exit" + gameObject.name);
+        //Debug.Log("mouse exit" + gameObject.name);
         var tempColor = hover.color;
         tempColor.a = 0.0f;
         hover.color = tempColor;
@@ -34,7 +36,7 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("mouse click" + gameObject.name);
+        //Debug.Log("mouse click" + gameObject.name);
 
         Transform tile = this.transform;
         Instantiate(trapCard, tile);
@@ -47,5 +49,28 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         tempColor.a = 0.0f;
         hover.color = tempColor;
         hover.enabled = true;
+        numOfPlayers = 0;
+    }
+
+    void Update()
+    {
+        numOfPlayers = getNumOfPlayers();
+        if (numOfPlayers != 0) Debug.Log(this.transform.name + " has " + numOfPlayers + " players");
+    }
+
+    int getNumOfPlayers() {
+        int num = 0;
+        GameObject tile = this.gameObject;
+        foreach (Transform transform in tile.transform)
+        {
+            Debug.Log(transform.tag);
+            if (transform.CompareTag("Player"))
+            {
+                Debug.Log(transform.name);
+                num++;
+            }
+        }
+
+        return num;
     }
 }
