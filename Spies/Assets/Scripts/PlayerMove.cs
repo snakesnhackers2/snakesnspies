@@ -46,7 +46,7 @@ public class PlayerMove : MonoBehaviour
                     }
                     else if (transform.CompareTag("DrawCard"))
                     {
-                        FindObjectOfType<GameManager>().DrawCard();
+                        FindObjectOfType<GameManager>().PickNewCard();
                     }
 
 

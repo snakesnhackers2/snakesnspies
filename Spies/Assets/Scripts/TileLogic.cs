@@ -10,19 +10,22 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     Image hover;
     public GameObject trapCard;
     public int damage;
-    public int defense;
-    public int hpBoost;
+    public int rounds;
     int numOfPlayers = 0;
     public bool hasTotem = false;
+    public GameManager gameManager;
     List<int> players = new List<int>();
 
     public bool combatInitiated = false;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        var tempColor = hover.color;
-        tempColor.a = 1f;
-        hover.color = tempColor;
+        if (gameManager.trapCardSelected == true)
+        {
+            var tempColor = hover.color;
+            tempColor.a = 1f;
+            hover.color = tempColor;
+        }
     }
 
 
@@ -37,8 +40,14 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Transform tile = this.transform;
-        Instantiate(trapCard, tile);
+        if (gameManager.trapCardSelected == true && gameManager.selectedCard != null)
+        {
+            Transform tile = this.transform;
+            Instantiate(trapCard, tile);
+            damage = gameManager.selectedCard.damage;
+            rounds = gameManager.selectedCard.rounds;
+        }
+        /*          */
     }
 
     void Start()
@@ -55,7 +64,8 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     {
         numOfPlayers = getNumOfPlayers();
 
-        if(numOfPlayers == 2) {
+        if (numOfPlayers == 2)
+        {
 
             if (!combatInitiated)
             {
@@ -73,10 +83,10 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         {
             if (transform.CompareTag("Player"))
             {
-                num++; 
+                num++;
                 int playernum = int.Parse(transform.name.Replace("PlayerCharacter", ""));
                 players.Add(playernum);
-            }   
+            }
         }
 
         return num;
