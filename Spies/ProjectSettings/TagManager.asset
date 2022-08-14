@@ -13,12 +13,12 @@ TagManager:
   - UI
   - 
   - 
+  - Cards
   - 
+  - CombatOverlay
   - 
-  - 
-  - 
-  - 
-  - 
+  - MainMap
+  - MainMapScroller
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Cards
+    uniqueID: 4240902725
+    locked: 0
+  - name: CombatOverlay
+    uniqueID: 3236066903
+    locked: 0
+  - name: MainMap
+    uniqueID: 1009339577
     locked: 0
