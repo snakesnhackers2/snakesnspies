@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
 
     public Text baseDamageLeft;
     public Text baseDamageRight;
+    public Text TotalDamageLeft;
+    public Text TotalDamageRight;
     public Text playerTurnText;
 
     public StatusBarScript statusBarLeft;
@@ -211,6 +213,9 @@ public class GameManager : MonoBehaviour
         goodLuckActive = false;
 
         combatPlayerTurn = 0;
+
+        TotalDamageLeft.text = "Total Attack:\n" + damageDealt[0].ToString();
+        TotalDamageRight.text = "Total Attack:\n" + damageDealt[1].ToString();
     }
 
     // TODO to update combat turn status and combat selection over etc
@@ -298,6 +303,9 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
+                    TotalDamageLeft.text = "Total Attack:\n" + damageDealt[0].ToString();
+                    TotalDamageRight.text = "Total Attack:\n" + damageDealt[1].ToString();
+
                     // remove the card from inventory
                     players[playerOrder[combatPlayerTurn] - 1].availableCardSlots[cardSelected.posInHand] = false;
 
@@ -603,12 +611,14 @@ public class GameManager : MonoBehaviour
             if (dicelocation == "diceleft")
             {
                 damageDealt[0] += diceRollNum;
-                baseDamageLeft.text = "+ " + diceRollNum + " Damge";
+                baseDamageLeft.text = "+ " + diceRollNum + " Attack";
+                TotalDamageLeft.text = "Total Attack:\n" + damageDealt[0].ToString();
 
             } else
             {
                 damageDealt[1] += diceRollNum;
-                baseDamageRight.text = "+ " + diceRollNum + " Damge";
+                baseDamageRight.text = "+ " + diceRollNum + " Attack";
+                TotalDamageRight.text = "Total Attack:\n" + damageDealt[1].ToString();
 
             }
         }

@@ -2845,8 +2845,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -86, y: -121}
-  m_SizeDelta: {x: 187.5459, y: 80.575}
+  m_AnchoredPosition: {x: -90.93082, y: 93.171}
+  m_SizeDelta: {x: 126.3866, y: 70.917}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &311447534
 MonoBehaviour:
@@ -2875,13 +2875,15 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 51
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Total Damage:'
+  m_Text: 'Total Attack:
+
+    0'
 --- !u!222 &311447535
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9170,8 +9172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 339.0024, y: -121}
-  m_SizeDelta: {x: 194.0665, y: 80.575}
+  m_AnchoredPosition: {x: 318.9, y: 87.815254}
+  m_SizeDelta: {x: 123.0208, y: 81.6295}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &966737763
 MonoBehaviour:
@@ -9200,15 +9202,15 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 51
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Total Damage:
+  m_Text: 'Total Attack:
 
-'
+    0'
 --- !u!222 &966737764
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13042,7 +13044,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '+ 7 Damge
+  m_Text: '+ 7 Attack
 
 '
 --- !u!222 &1378889702
@@ -17393,7 +17395,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '+ 3 Damge
+  m_Text: '+ 3 Attack
 
 '
 --- !u!222 &2002155876
