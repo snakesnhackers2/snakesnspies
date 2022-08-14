@@ -65,10 +65,8 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         GameObject tile = this.gameObject;
         foreach (Transform transform in tile.transform)
         {
-            Debug.Log(transform.tag);
             if (transform.CompareTag("Player"))
             {
-                Debug.Log(transform.name);
                 num++;
             }
         }

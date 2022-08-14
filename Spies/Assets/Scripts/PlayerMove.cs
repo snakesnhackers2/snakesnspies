@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public bool hasTotem = false; 
     public int currentTile = 1;
     GameObject destination;
 
@@ -23,6 +24,13 @@ public class PlayerMove : MonoBehaviour
                 Transform player = this.transform;
                 destination = GameObject.Find($"Tower/100");
                 player.SetParent(destination.gameObject.transform);
+
+                TileLogic end = destination.GetComponent<TileLogic>();
+                if(end.hasTotem) {
+                    hasTotem = true; // set player as owner
+                    end.hasTotem = false; // remove totem from tile
+                    Destroy(GameObject.Find("Tower/100/TotemTile"));
+                }
             }
             /*  else if (currentTile - steps < 1) { // when they're on the way back down
             Transform player = this.transform;

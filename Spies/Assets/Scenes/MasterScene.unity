@@ -7566,6 +7566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f852b551bd71cc74d97483afbc9e3bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTotem: 0
   currentTile: 1
 --- !u!1001 &794668802
 PrefabInstance:
@@ -11262,6 +11263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f852b551bd71cc74d97483afbc9e3bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTotem: 0
   currentTile: 1
 --- !u!1001 &1259185418
 PrefabInstance:
@@ -12263,6 +12265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f852b551bd71cc74d97483afbc9e3bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTotem: 0
   currentTile: 1
 --- !u!1001 &1371822931
 PrefabInstance:
@@ -13145,6 +13148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f852b551bd71cc74d97483afbc9e3bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTotem: 0
   currentTile: 1
 --- !u!1001 &1469928955
 PrefabInstance:
