@@ -17866,6 +17866,11 @@ MonoBehaviour:
   - {fileID: 1444235023}
   - {fileID: 756963790}
   - {fileID: 1702612900}
+  playerAvatars:
+  - {fileID: 1257403068}
+  - {fileID: 1359841892}
+  - {fileID: 786286506}
+  - {fileID: 1458428825}
   diceRollText: {fileID: 326479261}
   diceRollNum: 1
   combatPlayerTurn: 1
