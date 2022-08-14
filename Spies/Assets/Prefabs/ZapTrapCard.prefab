@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8053078758713983130}
   - component: {fileID: 8053078758713983131}
+  - component: {fileID: 4044940945192206822}
   m_Layer: 0
   m_Name: ZapTrapCard
   m_TagString: Untagged
@@ -82,3 +83,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4044940945192206822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053078758713983133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec93467c89a95342b8494aeba9ea415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardName: ZapTrapCard
