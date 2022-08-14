@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   playerhealth: {fileID: 2434328254220226502}
+  availableCardSlots: 0101010101
+  inventoryDeck: []
 --- !u!1 &1275909224566571549
 GameObject:
   m_ObjectHideFlags: 0
