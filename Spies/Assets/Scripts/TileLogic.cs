@@ -15,6 +15,8 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     int numOfPlayers = 0;
     public bool hasTotem = false;
 
+    public bool combatInitiated = false;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         var tempColor = hover.color;
@@ -50,10 +52,16 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     void Update()
     {
+
         numOfPlayers = getNumOfPlayers();
 
         if(numOfPlayers == 2) {
-            FindObjectOfType<GameManager>().EnterCombatSetup(1,2); // TODO update numbers FRANCENE help pls
+
+            if (!combatInitiated)
+            {
+                FindObjectOfType<GameManager>().EnterCombatSetup(1, 2); // TODO update numbers FRANCENE help pls
+                combatInitiated = true;
+            }
         }
     }
 
