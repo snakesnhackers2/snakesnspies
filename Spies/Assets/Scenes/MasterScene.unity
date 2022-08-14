@@ -1772,6 +1772,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
 --- !u!224 &207154765 stripped
@@ -2364,6 +2368,10 @@ PrefabInstance:
     - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
@@ -3229,6 +3237,10 @@ PrefabInstance:
     - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
@@ -4892,6 +4904,10 @@ PrefabInstance:
     - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
@@ -7920,6 +7936,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
 --- !u!224 &856419971 stripped
@@ -8748,6 +8768,10 @@ PrefabInstance:
     - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
@@ -11504,6 +11528,10 @@ PrefabInstance:
     - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
@@ -16688,6 +16716,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
 --- !u!224 &1987739059 stripped
@@ -17579,6 +17611,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
 --- !u!224 &2087043701 stripped
@@ -18178,6 +18214,10 @@ PrefabInstance:
     - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684867403366342845, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
+      propertyPath: m_TagString
+      value: DrawCard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0097f6e9192e04b8f3b06a12a55073, type: 3}
