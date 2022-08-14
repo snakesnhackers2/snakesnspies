@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
             inventoryCard.gameObject.SetActive(true);
 
             // move into place and scale
-            inventoryCard.transform.position = combatInventoryLeft.cardSlots[inventoryCard.posInHand].position;
+            inventoryCard.transform.position = combatInventoryRight.cardSlots[inventoryCard.posInHand].position;
             inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
         }
@@ -484,6 +484,7 @@ public class GameManager : MonoBehaviour
 
                     // update card inBigCardPos to true
                     cardSelected.inBigCardPos = true;
+                    
                 }
                 else
                 {
