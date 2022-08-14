@@ -96,3 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: HealthPotionCard
+  damage: 0
+  defense: 0
+  hpBoost: 30
+  rounds: 0

@@ -96,3 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: SlapCard
+  damage: 10
+  defense: 0
+  hpBoost: 0
+  rounds: 0
