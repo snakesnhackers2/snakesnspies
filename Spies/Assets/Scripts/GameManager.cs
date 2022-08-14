@@ -34,6 +34,11 @@ public class GameManager : MonoBehaviour
     private bool speedBoostActive = false;
     private bool mainEndTurn = false;
 
+    [Header("Card Selection")]
+    public GameObject cardSelectOverlay;
+
+    public Transform[] cardOptionSlots;
+
 
     [Header("Combat Overlay")]
     public int combatPlayerTurn = 0;
@@ -140,10 +145,25 @@ public class GameManager : MonoBehaviour
         // ANything else???
     }
 
+    /////// CARD DRAWING MECHANIC
+
     // TODO function for when a player passes a card station 
     public void PickNewCard()
     {
+        // mainmap setactive false
+        mainMap.SetActive(false);
 
+        // combatoverlay setactive true
+        cardSelectOverlay.SetActive(true);
+    }
+
+    public void CloseCardSelectView()
+    {
+        // mainmap setactive false
+        mainMap.SetActive(true);
+
+        // combatoverlay setactive true
+        cardSelectOverlay.SetActive(false);
     }
 
     /////// COMBAT HANDLING
@@ -224,6 +244,8 @@ public class GameManager : MonoBehaviour
 
         TotalDamageLeft.text = "Total Attack:\n" + damageDealt[0].ToString();
         TotalDamageRight.text = "Total Attack:\n" + damageDealt[1].ToString();
+
+        Debug.Log("Enter Combat Setup");
     }
 
     public void EndTurnButton()
@@ -350,49 +372,53 @@ public class GameManager : MonoBehaviour
             if (!mainEndTurn && !combatCardSelected)
             {
                 // process the card being used
-                CardUsed(cardSelected.cardName);
+                string cardValidation = CardUsed(cardSelected.cardName);
 
-                // add card back into main deck
-                deck.Add(cardSelected);
-
-                if (gamestate == "mainmap")
+                if (cardValidation == "ValidCard")
                 {
-                    // remove the card from inventory
-                    players[mainPlayerTurn - 1].availableCardSlots[cardSelected.posInHand] = false;
 
-                    players[mainPlayerTurn - 1].inventoryDeck.Remove(cardSelected);
+                    // add card back into main deck
+                    deck.Add(cardSelected);
 
-                    // reorganize inventory (ie move remaining cards to center with for loop
-                    int i = 0;
-                    foreach (Card inventoryCard in players[mainPlayerTurn - 1].inventoryDeck)
+                    if (gamestate == "mainmap")
                     {
-                        // move into place and scale
-                        inventoryCard.transform.position = playerInventories[0].cardSlots[i].position;
-                        inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                        i++;
+                        // remove the card from inventory
+                        players[mainPlayerTurn - 1].availableCardSlots[cardSelected.posInHand] = false;
+
+                        players[mainPlayerTurn - 1].inventoryDeck.Remove(cardSelected);
+
+                        // reorganize inventory (ie move remaining cards to center with for loop
+                        int i = 0;
+                        foreach (Card inventoryCard in players[mainPlayerTurn - 1].inventoryDeck)
+                        {
+                            // move into place and scale
+                            inventoryCard.transform.position = playerInventories[0].cardSlots[i].position;
+                            inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                            i++;
+                        }
                     }
-                }
-                else
-                {
-                    TotalDamageLeft.text = "Total Attack:\n" + damageDealt[0].ToString();
-                    TotalDamageRight.text = "Total Attack:\n" + damageDealt[1].ToString();
-
-                    // remove the card from inventory
-                    players[playerOrder[combatPlayerTurn] - 1].availableCardSlots[cardSelected.posInHand] = false;
-
-                    players[playerOrder[combatPlayerTurn] - 1].inventoryDeck.Remove(cardSelected);
-
-                    // reorganize inventory (ie move remaining cards to center with for loop
-                    int i = 0;
-                    foreach (Card inventoryCard in players[playerOrder[combatPlayerTurn] - 1].inventoryDeck)
+                    else
                     {
-                        // move into place and scale
-                        inventoryCard.transform.position = playerInventories[0].cardSlots[i].position;
-                        inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                        inventoryCard.posInHand = i;
-                        i++;
+                        TotalDamageLeft.text = "Total Attack:\n" + damageDealt[0].ToString();
+                        TotalDamageRight.text = "Total Attack:\n" + damageDealt[1].ToString();
+
+                        // remove the card from inventory
+                        players[playerOrder[combatPlayerTurn] - 1].availableCardSlots[cardSelected.posInHand] = false;
+
+                        players[playerOrder[combatPlayerTurn] - 1].inventoryDeck.Remove(cardSelected);
+
+                        // reorganize inventory (ie move remaining cards to center with for loop
+                        int i = 0;
+                        foreach (Card inventoryCard in players[playerOrder[combatPlayerTurn] - 1].inventoryDeck)
+                        {
+                            // move into place and scale
+                            inventoryCard.transform.position = playerInventories[0].cardSlots[i].position;
+                            inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                            inventoryCard.posInHand = i;
+                            i++;
+                        }
+                        players[playerOrder[combatPlayerTurn] - 1].inventoryDeck.Add(cardSelected);
                     }
-                    players[playerOrder[combatPlayerTurn] - 1].inventoryDeck.Add(cardSelected);
                 }
 
             }
@@ -479,7 +505,7 @@ public class GameManager : MonoBehaviour
     }
 
     // TODO
-    public void CardUsed(string cardName)
+    public string CardUsed(string cardName)
     {
         bool invalidCard = true;
 
@@ -530,25 +556,27 @@ public class GameManager : MonoBehaviour
 
                 case "HealthPotionCard":
                     invalidCard = false;
-                    break; players[mainPlayerTurn - 1].health += 30;
+                    players[mainPlayerTurn - 1].health += 30;
                     if (players[mainPlayerTurn - 1].health > 100)
                     {
                         players[mainPlayerTurn - 1].health = 100;
 
                     }
-
+                    break;
                 case "HeartyCakeCard":
                     invalidCard = false;
-                    break; players[mainPlayerTurn - 1].health += 50;
+                    players[mainPlayerTurn - 1].health += 50;
                     if (players[mainPlayerTurn - 1].health > 100)
                     {
                         players[mainPlayerTurn - 1].health = 100;
 
                     }
+                    break;
 
                 default:
                     break;
             }
+
         } else
         {
             if (!combatCardSelected)
@@ -626,11 +654,13 @@ public class GameManager : MonoBehaviour
             Debug.Log("This card cannot be used here!");
 
             // play some sound effect to indicate it is invalid & 
+            return "InvalidCard";
         } else
         {
             // TODO (KIV)
             // play some sound effect to indicate it is been selected successfully
             // or add like sparkles or something in unity
+            return "ValidCard";
         }
     }
 
