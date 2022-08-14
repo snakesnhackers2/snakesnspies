@@ -52,10 +52,8 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     {
         numOfPlayers = getNumOfPlayers();
 
-        if (numOfPlayers == 2)
-        {
-            //AMELIA START COMBAT
-            Debug.Log("fight");
+        if(numOfPlayers == 2) {
+            FindObjectOfType<GameManager>().EnterCombatSetup(1,2); // TODO update numbers
         }
     }
 
