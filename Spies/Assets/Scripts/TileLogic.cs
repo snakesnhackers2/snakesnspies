@@ -20,34 +20,34 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (gameManager.trapCardSelected == true)
+/*         if (gameManager.trapCardSelected == true)
         {
             var tempColor = hover.color;
             tempColor.a = 1f;
             hover.color = tempColor;
-        }
+        } */
     }
 
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        var tempColor = hover.color;
+/*         var tempColor = hover.color;
         tempColor.a = 0.0f;
         hover.color = tempColor;
-
+ */
     }
 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (gameManager.trapCardSelected == true && gameManager.selectedCard != null)
+        /*  if (gameManager.trapCardSelected == true && gameManager.selectedCard != null)
         {
             Transform tile = this.transform;
             Instantiate(trapCard, tile);
             damage = gameManager.selectedCard.damage;
             rounds = gameManager.selectedCard.rounds;
         }
-        /*          */
+                */
     }
 
     void Start()
