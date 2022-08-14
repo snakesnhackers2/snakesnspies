@@ -99,6 +99,11 @@ MonoBehaviour:
   cardName: RoundhouseKickCard
   posInHand: 0
   inBigCardPos: 0
+  type: Combat
+  damage: 35
+  defense: 0
+  hpBoost: 0
+  rounds: 0
 --- !u!61 &2636913253512560817
 BoxCollider2D:
   m_ObjectHideFlags: 0

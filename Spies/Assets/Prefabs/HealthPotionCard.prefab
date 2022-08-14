@@ -99,6 +99,11 @@ MonoBehaviour:
   cardName: HealthPotionCard
   posInHand: 0
   inBigCardPos: 0
+  type: Boost
+  damage: 0
+  defense: 0
+  hpBoost: 30
+  rounds: 0
 --- !u!61 &3049393160090993621
 BoxCollider2D:
   m_ObjectHideFlags: 0
