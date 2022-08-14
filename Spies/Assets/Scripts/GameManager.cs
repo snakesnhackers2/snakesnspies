@@ -399,7 +399,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // TODO
     public void MovementDiceRoll()
     {
         // generate random number form 1 to 6
