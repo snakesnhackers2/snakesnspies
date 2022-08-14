@@ -58,7 +58,7 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         //if (numOfPlayers != 0) Debug.Log(this.transform.name + " has " + numOfPlayers + " players");
 
         if(numOfPlayers == 2) {
-            //AMELIA START COMBAT
+            FindObjectOfType<GameManager>().EnterCombatSetup(1,2); // TODO update numbers
         }
     }
 

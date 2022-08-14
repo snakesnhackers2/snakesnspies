@@ -28,8 +28,14 @@ public class GameManager : MonoBehaviour
 
     public int diceRollNum = 1;
 
+    public Text mainPlayerTurnText;
+
+    private bool speedBoostActive = false;
+    private bool mainEndTurn = false;
+
+
     [Header("Combat Overlay")]
-    public int combatPlayerTurn = 1;
+    public int combatPlayerTurn = 0;
 
     public GameObject combatOverlay;
 
@@ -46,12 +52,16 @@ public class GameManager : MonoBehaviour
 
     // Stuff for calculating post combat outcome
     private int[] playerOrder;
-    private int[] damageProtect;
+
+    private float[] damageProtect;
+    private int[] damageDealt;
+
+    private bool diceRolled = false;
+    private bool combatCardSelected = false;
+    private bool endTurn = false;
 
     private bool goodLuckActive = false;
 
-    private int diceRollLeft;
-    private int diceRollRight;
 
     private void Start()
     {
@@ -92,22 +102,45 @@ public class GameManager : MonoBehaviour
     // TODO 
     public void UpdateMainTurn()
     {
+        // hide previous player card 
+        foreach (Card inventoryCard in players[mainPlayerTurn].inventoryDeck)
+        {
+            inventoryCard.gameObject.SetActive(false);
+        }
+
         mainPlayerTurn++;
         if (mainPlayerTurn > 4)
         {
             mainPlayerTurn = 1;
         }
 
-        // hide previous player card 
+        // update player text
+        mainPlayerTurnText.text = "Player " + mainPlayerTurn + "'s turn";
 
-        //
+        // show next player 
+        foreach (Card inventoryCard in players[mainPlayerTurn].inventoryDeck)
+        {
+            inventoryCard.gameObject.SetActive(true);
+        }
+
+        // reset any mainmap variables for the turn
+        speedBoostActive = false;
+
+        // the health bar visibility toggle (KIV)
+    }
+
+    // TODO function for when a player passes a card station 
+    public void PickNewCard()
+    {
+
     }
 
     /////// COMBAT HANDLING
 
-    // TODO
     public void EnterCombatSetup(int playernumleft, int playernumright)
     {
+        gamestate = "combat";
+
         // randomize player turn between the 
         int randomizer = Random.Range(0, 2);
         playerOrder = new int[2];
@@ -123,32 +156,68 @@ public class GameManager : MonoBehaviour
             playerOrder[0] = playernumright;
         }
 
-
         // mainmap setactive false
+        mainMap.SetActive(false);
 
         // combatoverlay setactive true
+        combatOverlay.SetActive(true);
 
-        // opponents cards set active
+        foreach (Card inventoryCard in players[playerOrder[0] - 1].inventoryDeck)
+        {
+            // cards set active
+            inventoryCard.gameObject.SetActive(true);
 
-        // move players cards into place
+            // move into place and scale
+            inventoryCard.transform.position = combatInventoryLeft.cardSlots[inventoryCard.posInHand].position;
+            inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-        // move opponents cards into place
+        }
+
+        foreach (Card inventoryCard in players[playerOrder[1] - 1].inventoryDeck)
+        {
+            // cards set active
+            inventoryCard.gameObject.SetActive(true);
+
+            // move into place and scale
+            inventoryCard.transform.position = combatInventoryLeft.cardSlots[inventoryCard.posInHand].position;
+            inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        }
 
         // update player health
+        statusBarLeft.SetHealth(players[playerOrder[0]].health);
+        statusBarLeft.SetPlayerNum(playerOrder[0]);
 
         // update opponents health
+        statusBarRight.SetHealth(players[playerOrder[1]].health);
+        statusBarRight.SetPlayerNum(playerOrder[1]);
 
-        // reset base health text left
-
-        // reset base health text right
+        // set base damage
+        baseDamageLeft.text = "Click Dice for base damage";
+        baseDamageRight.text = "Click Dice for base damage";
 
         // update player turn text
+        playerTurnText.text = "Player " + playerOrder[0] + "'s Turn";
 
+
+        // TODO
+        // Clear combat setup variables
+        combatCardSelected = false;
+        diceRolled = false;
+        endTurn = false;
+
+        damageProtect = new float[] { 0f, 0f };
+        damageDealt = new int[] { 0, 0 };
+        goodLuckActive = false;
+
+        combatPlayerTurn = 0;
     }
 
     // TODO to update combat turn status and combat selection over etc
     public void CombatStatusUpdate()
     {
+        // check if the dice has been rolled
+
 
     }
 
@@ -156,26 +225,45 @@ public class GameManager : MonoBehaviour
     public void ProcessCombatResult()
     {
         // check if anyone died, if totem is passed etc
+
     }
 
     // TODO 
     public void ExitCombat()
     {
+        gamestate = "mainmap";
+
         // hide non main turn player's cards individually with setactive false
+        foreach(int playernum in playerOrder)
+        {
+            foreach (Card inventoryCard in players[playernum - 1].inventoryDeck)
+            {
+                // move into place and scale
+                inventoryCard.transform.position = playerInventories[0].cardSlots[inventoryCard.posInHand].position;
+                inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+                // cards set active
+                if (playernum != mainPlayerTurn)
+                {
+                    inventoryCard.gameObject.SetActive(false);
+
+                }
+            }
+        }
 
         // mainmap setactive true
+        mainMap.SetActive(true);
 
         // combatoverlay setactive false
-
-        // move players cards back into place
+        combatOverlay.SetActive(false);
 
         // call map manager function to continue map traversal
+        // TODO [FRANCENE HERE]
     }
 
 
     /////// CARD HANDLING
 
-    // TODO
     public void CardSelection(Card cardSelected)
     {
 
@@ -183,18 +271,52 @@ public class GameManager : MonoBehaviour
 
         if(cardSelected.inBigCardPos)
         {
-            // take as card is used
+            if (!mainEndTurn && !combatCardSelected)
+            {
+                // process the card being used
+                CardUsed(cardSelected.cardName);
 
-            // process the card being used
-            CardUsed(cardSelected.cardName);
+                // add card back into main deck
+                deck.Add(cardSelected);
 
-            // remove the card from inventory
+                if (gamestate == "mainmap")
+                {
+                    // remove the card from inventory
+                    players[mainPlayerTurn - 1].availableCardSlots[cardSelected.posInHand] = false;
 
-            // players[j].availableCardSlots[i] = false;
-            // reorganize inventory (ie move remaining cards to center with for loop
+                    players[mainPlayerTurn - 1].inventoryDeck.Remove(cardSelected);
 
-            // add card back into main deck            
+                    // reorganize inventory (ie move remaining cards to center with for loop
+                    int i = 0;
+                    foreach (Card inventoryCard in players[mainPlayerTurn - 1].inventoryDeck)
+                    {
+                        // move into place and scale
+                        inventoryCard.transform.position = playerInventories[0].cardSlots[i].position;
+                        inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                        i++;
+                    }
+                }
+                else
+                {
+                    // remove the card from inventory
+                    players[playerOrder[combatPlayerTurn] - 1].availableCardSlots[cardSelected.posInHand] = false;
 
+                    players[playerOrder[combatPlayerTurn] - 1].inventoryDeck.Remove(cardSelected);
+
+                    // reorganize inventory (ie move remaining cards to center with for loop
+                    int i = 0;
+                    foreach (Card inventoryCard in players[playerOrder[combatPlayerTurn] - 1].inventoryDeck)
+                    {
+                        // move into place and scale
+                        inventoryCard.transform.position = playerInventories[0].cardSlots[i].position;
+                        inventoryCard.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                        inventoryCard.posInHand = i;
+                        i++;
+                    }
+                    players[playerOrder[combatPlayerTurn] - 1].inventoryDeck.Add(cardSelected);
+                }
+
+            }
 
         }
         else
@@ -226,7 +348,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 // check which player it is to update and if it is left or right
-                if (System.Array.IndexOf(playerOrder, combatPlayerTurn) == 0)
+                if (combatPlayerTurn == 0)
                 {
                     // left
                     // iterate through player inventory and move down any cards currently in big card pos)
@@ -250,7 +372,7 @@ public class GameManager : MonoBehaviour
                     cardSelected.inBigCardPos = true;
                 } else
                 {
-                    // left
+                    // right
                     // iterate through player inventory and move down any cards currently in big card pos)
                     foreach (Card inventoryCard in players[mainPlayerTurn - 1].inventoryDeck)
                     {
@@ -282,106 +404,154 @@ public class GameManager : MonoBehaviour
     {
         bool invalidCard = true;
 
-
-        // check for defense cards
-        switch (cardName)
+        if (gamestate == "mainmap")
         {
-            case "ArmourCard":
-                invalidCard = false;
-                break;
+            // TODO
+            // check for trap cards [FRANCENE HERE] call the trap placement functions
+            switch (cardName)
+            {
+                case "FartBombCard":
+                    invalidCard = false;
+                    break;
 
-            case "ShieldCard":
-                invalidCard = false;
-                break;
+                case "MouseTrapCard":
+                    invalidCard = false;
+                    break;
 
-            case "DodgeCard":
-                invalidCard = false;
-                break;
+                case "NetTrapCard":
+                    invalidCard = false;
+                    break;
 
-            case "GoodLuckCard":
-                invalidCard = false;
-                break;
+                case "ZapTrapCard":
+                    invalidCard = false;
+                    break;
 
-            default:
-                break;
-        }
+                default:
+                    break;
+            }
 
-        // check for trap cards [FRANCENE HERE] call the trap placement functions
-        switch (cardName)
+            // check for bonus cards
+            switch (cardName)
+            {
+
+                case "SpeedBoostCard":
+                    invalidCard = false;
+                    speedBoostActive = true;
+                    break;
+
+                case "AppleCard":
+                    invalidCard = false;
+                    players[mainPlayerTurn - 1].health += 10;
+                    if (players[mainPlayerTurn - 1].health > 100)
+                    {
+                        players[mainPlayerTurn - 1].health = 100;
+
+                    }
+                    break;
+
+                case "HealthPotionCard":
+                    invalidCard = false;
+                    break; players[mainPlayerTurn - 1].health += 30;
+                    if (players[mainPlayerTurn - 1].health > 100)
+                    {
+                        players[mainPlayerTurn - 1].health = 100;
+
+                    }
+
+                case "HeartyCakeCard":
+                    invalidCard = false;
+                    break; players[mainPlayerTurn - 1].health += 50;
+                    if (players[mainPlayerTurn - 1].health > 100)
+                    {
+                        players[mainPlayerTurn - 1].health = 100;
+
+                    }
+
+                default:
+                    break;
+            }
+        } else
         {
-            case "FartBombCard":
-                invalidCard = false;
-                break;
+            if (!combatCardSelected)
+            {
+                // check for defense cards
+                switch (cardName)
+                {
+                    case "ArmourCard":
+                        damageProtect[combatPlayerTurn] = 0.8f;
+                        combatCardSelected = true;
+                        invalidCard = false;
+                        break;
 
-            case "MouseTrapCard":
-                invalidCard = false;
-                break;
+                    case "ShieldCard":
+                        damageProtect[combatPlayerTurn] = 0.6f;
+                        combatCardSelected = true;
+                        invalidCard = false;
+                        break;
 
-            case "NetTrapCard":
-                invalidCard = false;
-                break;
+                    case "DodgeCard":
+                        damageProtect[combatPlayerTurn] = 0.6f;
+                        combatCardSelected = true;
+                        invalidCard = false;
+                        break;
 
-            case "ZapTrapCard":
-                invalidCard = false;
-                break;
+                    case "GoodLuckCard":
+                        goodLuckActive = true;
+                        combatCardSelected = true;
+                        invalidCard = false;
+                        break;
 
-            default:
-                break;
+                    default:
+                        break;
+                }
+
+
+
+                // check for attack cards
+                switch (cardName)
+                {
+                    case "RoundhouseKickCard":
+                        damageDealt[combatPlayerTurn] += 35;
+                        combatCardSelected = true;
+                        invalidCard = false;
+                        break;
+
+                    case "DaggerSlashCard":
+                        damageDealt[combatPlayerTurn] += 45;
+                        combatCardSelected = true;
+                        invalidCard = false;
+                        break;
+
+                    case "SlapCard":
+                        damageDealt[combatPlayerTurn] += 10;
+                        combatCardSelected = true;
+                        invalidCard = false;
+                        break;
+
+                    case "SuckerPunchCard":
+                        damageDealt[combatPlayerTurn] += 25;
+                        combatCardSelected = true;
+                        invalidCard = false;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            
         }
-
-        // check for bonus cards
-        switch (cardName)
-        {
-
-            case "SpeedBoostCard":
-                invalidCard = false;
-                break;
-
-            case "AppleCard":
-                invalidCard = false;
-                break;
-
-            case "HealthPotionCard":
-                invalidCard = false;
-                break;
-
-            case "HeartyCakeCard":
-                invalidCard = false;
-                break;
-
-            default:
-                break;
-        }
-
-        // check for attack cards
-        switch (cardName)
-        {
-            case "RoundhouseKickCard":
-                invalidCard = false;
-                break;
-
-            case "DaggerSlashCard":
-                invalidCard = false;
-                break;
-
-            case "SlapCard":
-                invalidCard = false;
-                break;
-
-            case "SuckerPunchCard":
-                invalidCard = false;
-                break;
-
-            default:
-                break;
-        }
-
+        
 
         if (invalidCard)
         {
             Debug.Log("This card cannot be used here!");
 
-            // play some sound effect
+            // play some sound effect to indicate it is invalid & 
+        } else
+        {
+            // TODO (KIV)
+            // play some sound effect to indicate it is been selected successfully
+            // or add like sparkles or something in unity
         }
     }
 
@@ -394,20 +564,33 @@ public class GameManager : MonoBehaviour
             MovementDiceRoll();
         } else
         {
-            CombatDiceRoll(diceLocation);
+            if (!diceRolled)
+            {
+                CombatDiceRoll(diceLocation);
+            }
         }
     }
 
     // TODO
     public void MovementDiceRoll()
     {
+        mainEndTurn = true;
+
         // generate random number form 1 to 6
         diceRollNum = Random.Range(1, 7);
 
         diceRollText.text = diceRollNum.ToString();
 
+        if (speedBoostActive)
+        {
+            speedBoostActive = false;
+            diceRollNum *= 2;
+        }
+
         // call character movement function for player <playerturn>
         // FRANCENE HERE
+
+        
     }
 
     public void CombatDiceRoll(string dicelocation)
@@ -415,17 +598,23 @@ public class GameManager : MonoBehaviour
         // for max base damage of 10
         diceRollNum = Random.Range(1, 11);
 
-        if (dicelocation == "diceleft")
+        if (!diceRolled)
         {
-            diceRollLeft = diceRollNum;
-            baseDamageLeft.text = "+ " + diceRollNum + " Damge";
+            if (dicelocation == "diceleft")
+            {
+                damageDealt[0] += diceRollNum;
+                baseDamageLeft.text = "+ " + diceRollNum + " Damge";
 
-        } else
-        {
-            diceRollRight = diceRollNum;
-            baseDamageRight.text = "+ " + diceRollNum + " Damge";
+            } else
+            {
+                damageDealt[1] += diceRollNum;
+                baseDamageRight.text = "+ " + diceRollNum + " Damge";
 
+            }
         }
+        
+        
+        diceRolled = true;
     }
 
 
