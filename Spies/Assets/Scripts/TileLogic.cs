@@ -14,6 +14,7 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     public int hpBoost;
     int numOfPlayers = 0;
     public bool hasTotem = false;
+    List<int> players = new List<int>();
 
     public bool combatInitiated = false;
 
@@ -52,14 +53,13 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     void Update()
     {
-
         numOfPlayers = getNumOfPlayers();
 
         if(numOfPlayers == 2) {
 
             if (!combatInitiated)
             {
-                FindObjectOfType<GameManager>().EnterCombatSetup(1, 2); // TODO update numbers FRANCENE help pls
+                FindObjectOfType<GameManager>().EnterCombatSetup(players[0], players[1]);
                 combatInitiated = true;
             }
         }
@@ -73,8 +73,10 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         {
             if (transform.CompareTag("Player"))
             {
-                num++;
-            }
+                num++; 
+                int playernum = int.Parse(transform.name.Replace("PlayerCharacter", ""));
+                players.Add(playernum);
+            }   
         }
 
         return num;
