@@ -43,7 +43,12 @@ public class GameManager : MonoBehaviour
     public StatusBarScript statusBarLeft;
     public StatusBarScript statusBarRight;
 
+
+    // Stuff for calculating post combat outcome
     private int[] playerOrder;
+    private int[] damageProtect;
+
+    private bool goodLuckActive = false;
 
     private int diceRollLeft;
     private int diceRollRight;
@@ -174,9 +179,20 @@ public class GameManager : MonoBehaviour
         if(cardSelected.inBigCardPos)
         {
             // take as card is used
-            // players[j].availableCardSlots[i] = false;
 
-        } else
+            // process the card being used
+            CardUsed(cardSelected.cardName);
+
+            // remove the card from inventory
+
+            // players[j].availableCardSlots[i] = false;
+            // reorganize inventory (ie move remaining cards to center with for loop
+
+            // add card back into main deck            
+
+
+        }
+        else
         {
             // shifts a card up from player hand to big card view
 
@@ -254,12 +270,119 @@ public class GameManager : MonoBehaviour
             }
 
         }
+    }
+
+    // TODO
+
+    public void CardUsed(string cardName)
+    {
+        bool invalidCard = true;
 
 
+        // check for defense cards
+        switch (cardName)
+        {
+            case "ArmourCard":
+                invalidCard = false;
+                break;
+
+            case "ShieldCard":
+                invalidCard = false;
+                break;
+
+            case "DodgeCard":
+                invalidCard = false;
+                break;
+
+            case "GoodLuckCard":
+                invalidCard = false;
+                break;
+
+            default:
+                break;
+        }
+
+        // check for trap cards [FRANCENE HERE] call the trap placement functions
+        switch (cardName)
+        {
+            case "FartBombCard":
+                invalidCard = false;
+                break;
+
+            case "MouseTrapCard":
+                invalidCard = false;
+                break;
+
+            case "NetTrapCard":
+                invalidCard = false;
+                break;
+
+            case "ZapTrapCard":
+                invalidCard = false;
+                break;
+
+            default:
+                break;
+        }
+
+        // check for bonus cards
+        switch (cardName)
+        {
+
+            case "SpeedBoostCard":
+                invalidCard = false;
+                break;
+
+            case "AppleCard":
+                invalidCard = false;
+                break;
+
+            case "HealthPotionCard":
+                invalidCard = false;
+                break;
+
+            case "HeartyCakeCard":
+                invalidCard = false;
+                break;
+
+            default:
+                break;
+        }
+
+        // check for attack cards
+        switch (cardName)
+        {
+            case "RoundhouseKickCard":
+                invalidCard = false;
+                break;
+
+            case "DaggerSlashCard":
+                invalidCard = false;
+                break;
+
+            case "SlapCard":
+                invalidCard = false;
+                break;
+
+            case "SuckerPunchCard":
+                invalidCard = false;
+                break;
+
+            default:
+                break;
+        }
+
+
+        if (invalidCard)
+        {
+            Debug.Log("This card cannot be used here!");
+
+            // play some sound effect
+        }
     }
 
 
-    // DICE HANDLING
+    /////////////// DICE HANDLING
     public void DiceRollSelect(string diceLocation)
     {
         if(diceLocation == "mainmap")
@@ -280,7 +403,7 @@ public class GameManager : MonoBehaviour
         diceRollText.text = diceRollNum.ToString();
 
         // call character movement function for player <playerturn>
-
+        // FRANCENE HERE
     }
 
     public void CombatDiceRoll(string dicelocation)

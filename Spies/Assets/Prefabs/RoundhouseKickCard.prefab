@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec93467c89a95342b8494aeba9ea415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: RoundHouseKickCard
+  cardName: RoundhouseKickCard
   posInHand: 0
   inBigCardPos: 0
 --- !u!61 &2636913253512560817
