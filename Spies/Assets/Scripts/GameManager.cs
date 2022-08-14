@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public PlayerInventory[] playerInventories;
 
     public GameObject[] playerObjects; 
+    public GameObject[] playerAvatars;
     
     public TextMesh diceRollText;
 
@@ -649,7 +650,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // TODO
     public void MovementDiceRoll()
     {
         mainEndTurn = true;
@@ -666,9 +666,11 @@ public class GameManager : MonoBehaviour
         }
 
         // call character movement function for player <playerturn>
-        // FRANCENE HERE
+        GameObject playerObject = playerAvatars[mainPlayerTurn - 1].gameObject;
+        PlayerMove player = playerObject.GetComponent<PlayerMove>();
+        player.Move(diceRollNum);
 
-        
+        UpdateMainTurn();
     }
 
     public void CombatDiceRoll(string dicelocation)

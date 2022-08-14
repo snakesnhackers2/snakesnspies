@@ -17,7 +17,6 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //Debug.Log("mouse enter" + gameObject.name);
         var tempColor = hover.color;
         tempColor.a = 1f;
         hover.color = tempColor;
@@ -26,7 +25,6 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //Debug.Log("mouse exit" + gameObject.name);
         var tempColor = hover.color;
         tempColor.a = 0.0f;
         hover.color = tempColor;
@@ -36,8 +34,6 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log("mouse click" + gameObject.name);
-
         Transform tile = this.transform;
         Instantiate(trapCard, tile);
     }
@@ -55,22 +51,20 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     void Update()
     {
         numOfPlayers = getNumOfPlayers();
-        //if (numOfPlayers != 0) Debug.Log(this.transform.name + " has " + numOfPlayers + " players");
 
         if(numOfPlayers == 2) {
             FindObjectOfType<GameManager>().EnterCombatSetup(1,2); // TODO update numbers FRANCENE help pls
         }
     }
 
-    int getNumOfPlayers() {
+    public int getNumOfPlayers()
+    {
         int num = 0;
         GameObject tile = this.gameObject;
         foreach (Transform transform in tile.transform)
         {
-            Debug.Log(transform.tag);
             if (transform.CompareTag("Player"))
             {
-                Debug.Log(transform.name);
                 num++;
             }
         }
