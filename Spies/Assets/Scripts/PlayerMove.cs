@@ -8,11 +8,6 @@ public class PlayerMove : MonoBehaviour
     public int currentTile = 1;
     GameObject destination;
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void Move(int steps)
     {
         Transform player = this.transform;
@@ -51,7 +46,7 @@ public class PlayerMove : MonoBehaviour
                     }
                     else if (transform.CompareTag("DrawCard"))
                     {
-                        // TODO: LOGIC TO DRAW CARD HERE
+                        FindObjectOfType<GameManager>().PickNewCard();
                     }
 
 
