@@ -2951,6 +2951,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 868464850}
     m_Modifications:
+    - target: {fileID: 4968565007195082300, guid: 99e8b3ab5cdd3ae4aaf4c9159398c3ce, type: 3}
+      propertyPath: diceLocation
+      value: diceleft
+      objectReference: {fileID: 0}
     - target: {fileID: 7177234091212215051, guid: 99e8b3ab5cdd3ae4aaf4c9159398c3ce, type: 3}
       propertyPath: m_Name
       value: DiceImage
@@ -6425,6 +6429,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8627415}
     m_Modifications:
+    - target: {fileID: 4968565007195082300, guid: 99e8b3ab5cdd3ae4aaf4c9159398c3ce, type: 3}
+      propertyPath: diceLocation
+      value: mainmap
+      objectReference: {fileID: 0}
     - target: {fileID: 7601196018565706891, guid: 99e8b3ab5cdd3ae4aaf4c9159398c3ce, type: 3}
       propertyPath: m_Text
       value: 'Click to Roll
@@ -11238,6 +11246,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 868464850}
     m_Modifications:
+    - target: {fileID: 4968565007195082300, guid: 99e8b3ab5cdd3ae4aaf4c9159398c3ce, type: 3}
+      propertyPath: diceLocation
+      value: diceright
+      objectReference: {fileID: 0}
     - target: {fileID: 7177234091212215051, guid: 99e8b3ab5cdd3ae4aaf4c9159398c3ce, type: 3}
       propertyPath: m_Name
       value: DiceImage
