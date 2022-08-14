@@ -22,9 +22,9 @@ public class GameManager : MonoBehaviour
 
     public PlayerInventory[] playerInventories;
 
-    public GameObject[] playerObjects; 
+    public GameObject[] playerObjects;
     public GameObject[] playerAvatars;
-    
+
     public TextMesh diceRollText;
 
     public int diceRollNum = 1;
@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     public StatusBarScript statusBarLeft;
     public StatusBarScript statusBarRight;
 
+    public bool trapCardSelected = false;
+    public Card selectedCard;
 
     // Stuff for calculating post combat outcome
     private int[] playerOrder;
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+
         // init draw 3 cards for all 4 players
         for (int j = 0; j < 4; j++)
         {
@@ -86,7 +88,7 @@ public class GameManager : MonoBehaviour
         // hide the non turn players cards
         for (int i = 1; i < 4; i++)
         {
-            foreach(Card inventoryCard in players[i].inventoryDeck)
+            foreach (Card inventoryCard in players[i].inventoryDeck)
             {
                 inventoryCard.gameObject.SetActive(false);
             }
@@ -138,6 +140,8 @@ public class GameManager : MonoBehaviour
         }
 
         // ANything else???
+        trapCardSelected = false;
+        selectedCard = null;
     }
 
     // TODO function for when a player passes a card station 
@@ -161,7 +165,8 @@ public class GameManager : MonoBehaviour
         {
             playerOrder[0] = playernumleft;
             playerOrder[1] = playernumright;
-        } else
+        }
+        else
         {
             playerOrder[1] = playernumleft;
             playerOrder[0] = playernumright;
@@ -218,7 +223,7 @@ public class GameManager : MonoBehaviour
 
         damageProtect = new float[] { 0f, 0f };
         damageDealt = new int[] { 0, 0 };
-        goodLuckActive = new bool[] {false, false};
+        goodLuckActive = new bool[] { false, false };
 
         combatPlayerTurn = 0;
 
@@ -249,7 +254,7 @@ public class GameManager : MonoBehaviour
                 if (combatPlayerTurn > 1)
                 {
                     ProcessCombatResult();
-                } 
+                }
             }
         }
     }
@@ -266,7 +271,7 @@ public class GameManager : MonoBehaviour
         if (goodLuckActive[0])
         {
             goodLuckActive[0] = false;
-            if (Random.Range(0,10) > 7)
+            if (Random.Range(0, 10) > 7)
             {
                 damageRecieved = 0;
             }
@@ -310,7 +315,7 @@ public class GameManager : MonoBehaviour
         gamestate = "mainmap";
 
         // hide non main turn player's cards individually with setactive false
-        foreach(int playernum in playerOrder)
+        foreach (int playernum in playerOrder)
         {
             foreach (Card inventoryCard in players[playernum - 1].inventoryDeck)
             {
@@ -342,10 +347,11 @@ public class GameManager : MonoBehaviour
 
     public void CardSelection(Card cardSelected)
     {
+        if (cardSelected.type == "Trap") trapCardSelected = true;
+        else trapCardSelected = false;
+        selectedCard = cardSelected;
 
-        Debug.Log(cardSelected.cardName);
-
-        if(cardSelected.inBigCardPos)
+        if (cardSelected.inBigCardPos)
         {
             if (!mainEndTurn && !combatCardSelected)
             {
@@ -449,7 +455,8 @@ public class GameManager : MonoBehaviour
 
                     // update card inBigCardPos to true
                     cardSelected.inBigCardPos = true;
-                } else
+                }
+                else
                 {
                     // right
                     // iterate through player inventory and move down any cards currently in big card pos)
@@ -505,6 +512,7 @@ public class GameManager : MonoBehaviour
                     invalidCard = false;
                     break;
 
+
                 default:
                     break;
             }
@@ -549,7 +557,8 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
-        } else
+        }
+        else
         {
             if (!combatCardSelected)
             {
@@ -617,16 +626,17 @@ public class GameManager : MonoBehaviour
                         break;
                 }
             }
-            
+
         }
-        
+
 
         if (invalidCard)
         {
             Debug.Log("This card cannot be used here!");
 
             // play some sound effect to indicate it is invalid & 
-        } else
+        }
+        else
         {
             // TODO (KIV)
             // play some sound effect to indicate it is been selected successfully
@@ -638,10 +648,11 @@ public class GameManager : MonoBehaviour
     /////////////// DICE HANDLING
     public void DiceRollSelect(string diceLocation)
     {
-        if(diceLocation == "mainmap")
+        if (diceLocation == "mainmap")
         {
             MovementDiceRoll();
-        } else
+        }
+        else
         {
             if (!diceRolled)
             {
@@ -670,7 +681,7 @@ public class GameManager : MonoBehaviour
         PlayerMove player = playerObject.GetComponent<PlayerMove>();
         player.Move(diceRollNum);
 
-        UpdateMainTurn();
+        //UpdateMainTurn();
     }
 
     public void CombatDiceRoll(string dicelocation)
@@ -686,7 +697,8 @@ public class GameManager : MonoBehaviour
                 baseDamageLeft.text = "+ " + diceRollNum + " Attack";
                 TotalDamageLeft.text = "Total Attack:\n" + damageDealt[0].ToString();
 
-            } else
+            }
+            else
             {
                 damageDealt[1] += diceRollNum;
                 baseDamageRight.text = "+ " + diceRollNum + " Attack";
@@ -694,8 +706,8 @@ public class GameManager : MonoBehaviour
 
             }
         }
-        
-        
+
+
         diceRolled = true;
         CombatStatusUpdate();
     }

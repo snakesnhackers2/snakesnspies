@@ -16,5 +16,10 @@ public class Card : MonoBehaviour
     private void OnMouseDown()
     {
         FindObjectOfType<GameManager>().CardSelection(this);
+        inBigCardPos = true;
+    }
+
+    private void OnMouseUp() {
+        inBigCardPos = false;
     }
 }
