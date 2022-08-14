@@ -34,6 +34,11 @@ public class GameManager : MonoBehaviour
     private bool speedBoostActive = false;
     private bool mainEndTurn = false;
 
+    [Header("Card Selection")]
+    public GameObject cardSelectOverlay;
+
+    public Transform[] cardOptionSlots;
+
 
     [Header("Combat Overlay")]
     public int combatPlayerTurn = 0;
@@ -140,10 +145,25 @@ public class GameManager : MonoBehaviour
         // ANything else???
     }
 
+    /////// CARD DRAWING MECHANIC
+
     // TODO function for when a player passes a card station 
     public void PickNewCard()
     {
+        // mainmap setactive false
+        mainMap.SetActive(false);
 
+        // combatoverlay setactive true
+        cardSelectOverlay.SetActive(true);
+    }
+
+    public void CloseCardSelectView()
+    {
+        // mainmap setactive false
+        mainMap.SetActive(true);
+
+        // combatoverlay setactive true
+        cardSelectOverlay.SetActive(false);
     }
 
     /////// COMBAT HANDLING
@@ -224,6 +244,8 @@ public class GameManager : MonoBehaviour
 
         TotalDamageLeft.text = "Total Attack:\n" + damageDealt[0].ToString();
         TotalDamageRight.text = "Total Attack:\n" + damageDealt[1].ToString();
+
+        Debug.Log("Enter Combat Setup");
     }
 
     public void EndTurnButton()
@@ -530,21 +552,22 @@ public class GameManager : MonoBehaviour
 
                 case "HealthPotionCard":
                     invalidCard = false;
-                    break; players[mainPlayerTurn - 1].health += 30;
+                    players[mainPlayerTurn - 1].health += 30;
                     if (players[mainPlayerTurn - 1].health > 100)
                     {
                         players[mainPlayerTurn - 1].health = 100;
 
                     }
-
+                    break;
                 case "HeartyCakeCard":
                     invalidCard = false;
-                    break; players[mainPlayerTurn - 1].health += 50;
+                    players[mainPlayerTurn - 1].health += 50;
                     if (players[mainPlayerTurn - 1].health > 100)
                     {
                         players[mainPlayerTurn - 1].health = 100;
 
                     }
+                    break;
 
                 default:
                     break;
