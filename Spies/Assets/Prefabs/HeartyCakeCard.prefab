@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 481003467732773178}
   - component: {fileID: 481003467732773177}
   - component: {fileID: 5962439170432982758}
+  - component: {fileID: -7642019678913991880}
   m_Layer: 0
   m_Name: HeartyCakeCard
   m_TagString: Untagged
@@ -96,8 +97,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: HeartyCakeCard
-  type: Boost
-  damage: 0
-  defense: 0
-  hpBoost: 50
-  rounds: 0
+  posInHand: 0
+  inBigCardPos: 0
+--- !u!61 &-7642019678913991880
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481003467732773179}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.61, y: 10.28}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.61, y: 10.28}
+  m_EdgeRadius: 0

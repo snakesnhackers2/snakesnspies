@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  playerhealth: {fileID: 2434328254220226502}
+  availableCardSlots: 0101010101
+  inventoryDeck: []
 --- !u!1 &1275909224566571549
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,3 +333,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3493816994230149325, guid: 87a6824683d0196438e0227b1098b846, type: 3}
   m_PrefabInstance: {fileID: 1275909223899852552}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2434328254220226502 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3493816994230149326, guid: 87a6824683d0196438e0227b1098b846, type: 3}
+  m_PrefabInstance: {fileID: 1275909223899852552}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46de0cf50c5f9244da1537e5a19a6e36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

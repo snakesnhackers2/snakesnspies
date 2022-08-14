@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2317302960999439920}
+  - component: {fileID: 8794145574684400844}
   m_Layer: 0
   m_Name: PlayerInventoryDeck
   m_TagString: Untagged
@@ -37,6 +38,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8794145574684400844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984651626426555818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2a9a108972f1341bc2de7c9e920a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardSlots:
+  - {fileID: 5860778213370569203}
+  - {fileID: 5401771051273878289}
+  - {fileID: 4829302629254681101}
+  - {fileID: 6547551610677308370}
+  - {fileID: 4789306353708281657}
+  bigCardSlot: {fileID: 5585110450215201656}
 --- !u!1 &6754562260260161788
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5860778213370569203}
   m_Layer: 0
-  m_Name: CardSlot3
+  m_Name: CardSlot1
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -222,7 +242,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7755073812788460208}
-  m_Text: Play card
+  m_Text: Click Card to View
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
@@ -246,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4829302629254681101}
   m_Layer: 0
-  m_Name: CardSlot4
+  m_Name: CardSlot3
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -306,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6547551610677308370}
   m_Layer: 0
-  m_Name: CardSlot1
+  m_Name: CardSlot4
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
