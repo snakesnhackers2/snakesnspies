@@ -69,7 +69,7 @@ public class TileLogic : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
             if (!combatInitiated)
             {
-                FindObjectOfType<GameManager>().EnterCombatSetup(players[0], players[1]);
+                //FindObjectOfType<GameManager>().EnterCombatSetup(players[0], players[1]);
                 combatInitiated = true;
             }
         }

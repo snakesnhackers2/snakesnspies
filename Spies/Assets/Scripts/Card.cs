@@ -15,6 +15,6 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        FindObjectOfType<GameManager>().CardSelection(this);
+        //FindObjectOfType<GameManager>().CardSelection(this);
     }
 }

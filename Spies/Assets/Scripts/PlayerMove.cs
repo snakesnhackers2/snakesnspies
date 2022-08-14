@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
     public bool hasTotem = false;
     public int currentTile = 1;
     GameObject destination;
+    GameManager gameManager;
 
     public void Move(int steps)
     {
@@ -19,14 +20,7 @@ public class PlayerMove : MonoBehaviour
                 currentTile = 100;
                 destination = GameObject.Find($"Tower/100");
                 player.SetParent(destination.gameObject.transform);
-
-                TileLogic end = destination.GetComponent<TileLogic>();
-                if (end.hasTotem)
-                {
-                    hasTotem = true; // set player as owner
-                    end.hasTotem = false; // remove totem from tile
-                    Destroy(GameObject.Find("Tower/100/TotemTile"));
-                }
+               
             }
             /*  else if (currentTile - steps < 1) { // when they're on the way back down
             Transform player = this.transform;
@@ -38,24 +32,13 @@ public class PlayerMove : MonoBehaviour
                 destination = GameObject.Find($"Tower/{currentTile}");
                 foreach (Transform transform in destination.transform)
                 {
-                    if (transform.CompareTag("Trap"))
+                    if (transform.CompareTag("DrawCard"))
                     {
-                        //deal some damage or sth
-                        // TODO: ADD TRAP LOGIC
-                        Debug.Log($"You hit a trap at {currentTile}");
-                    }
-                    else if (transform.CompareTag("DrawCard"))
-                    {
-                        FindObjectOfType<GameManager>().PickNewCard();
-                    }
-
-
-                    TileLogic tile = destination.GetComponent<TileLogic>();
-                    if (tile.getNumOfPlayers() == 2)
-                    {
-
+                        //FindObjectOfType<GameManager>().PickNewCard();
                     }
                 }
+
+
                 player.SetParent(destination.gameObject.transform);
             }
 
@@ -81,5 +64,11 @@ public class PlayerMove : MonoBehaviour
             GameObject opening = GameObject.Find($"Tower/{otherEnd}");
             player.SetParent(opening.gameObject.transform);
         }
+
+        if (currentTile == 100)  gameManager.Win();
+    }
+
+    void Start() {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 }

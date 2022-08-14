@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     private bool endTurn = false;
 
     private bool[] goodLuckActive = new bool[] { false, false };
-
+    public GameObject winScreen;
 
     private void Start()
     {
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
     public void UpdateMainTurn()
     {
         // hide previous player card 
-        foreach (Card inventoryCard in players[mainPlayerTurn].inventoryDeck)
+        foreach (Card inventoryCard in players[mainPlayerTurn-1].inventoryDeck)
         {
             inventoryCard.gameObject.SetActive(false);
         }
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
         mainPlayerTurnText.text = "Player " + mainPlayerTurn + "'s turn";
 
         // show next player 
-        foreach (Card inventoryCard in players[mainPlayerTurn].inventoryDeck)
+        foreach (Card inventoryCard in players[mainPlayerTurn-1].inventoryDeck)
         {
             inventoryCard.gameObject.SetActive(true);
         }
@@ -255,7 +255,7 @@ public class GameManager : MonoBehaviour
     public void EndTurnButton()
     {
         endTurn = true;
-        CombatStatusUpdate();
+        //CombatStatusUpdate();
     }
 
     public void CombatStatusUpdate()
@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour
 
                 if (combatPlayerTurn > 1)
                 {
-                    ProcessCombatResult();
+                    //ProcessCombatResult();
                 }
             }
         }
@@ -741,9 +741,11 @@ public class GameManager : MonoBehaviour
 
 
         diceRolled = true;
-        CombatStatusUpdate();
+        //CombatStatusUpdate();
     }
 
-
+    public void Win() {
+        winScreen.SetActive(true);
+    }
 
 }
